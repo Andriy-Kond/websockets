@@ -1,6 +1,6 @@
-JS, Node.js, HTML, CSS
+JS, Node.js, web-sockets
 
-## Test WebSocket library (https://www.npmjs.com/package/ws)
+## Test ws web-socket library (https://www.npmjs.com/package/ws)
 
 Goal: Learn base of web-sockets
 
