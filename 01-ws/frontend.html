@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    WS
+    <script>
+      const ws = new WebSocket('ws://localhost:5000');
+
+      // Створюємо обробники подій
+      // коннект на сервер:
+      ws.onopen = () => {
+        console.log('Connected on server');
+      };
+
+      // друкуємо повідомлення від серверу
+      ws.onmessage = event => {
+        // відсилається буфер:
+        console.log('Got message from backend:', event.data);
+      };
+
+      // // Відсилати повідомлення з фронту на бек кожну секунду:
+      // setInterval(() => {
+      //   ws.send('this is message from frontend');
+      // }, 1000);
+
+      // відсилання чогось з фронтенду на сервер
+      // ws.send('message from frontend');
+    </script>
+  </body>
+</html>

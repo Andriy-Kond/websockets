@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket.io</title>
+
+    <!-- скріпт можна взяти з node_modules/socket.io-client/dist/socket.io.js Але в мене воно не працює навіть локально чомусь...-->
+    <script src="D:\Programming\JS-Node-HW\Module-06\websockets\02-socket.io\node_modules\socket.io-client\dist\socket.io.js"></script>
+  </head>
+  <body>
+    Socket.io
+
+    <script>
+      // Після підключення скрипту у хедері, з'являється об'єкт io:
+      const ws = io('http://localhost:5000'); // вказуємо шлях куди тре законектитись
+
+      // тепер можна реагувати на події.
+      // На повідомлення друкую його:
+      ws.on('chatInfo', message => {
+        console.log(message);
+      });
+    </script>
+  </body>
+</html>
