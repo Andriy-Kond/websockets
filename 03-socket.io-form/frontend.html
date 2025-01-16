@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket.io</title>
+
+    <!-- скріпт можна взяти з node_modules/socket.io-client/dist/socket.io.js -->
+    <script src="D:\Programming\JS-Node-HW\Module-06\websockets\03-socket.io-form\node_modules\socket.io-client\dist\socket.io.js"></script>
+  </head>
+  <body>
+    Socket io
+
+    <form id="form">
+      <label for="user">User</label>
+      <input type="text" name="user" />
+
+      <label for="message">Message</label>
+      <input type="text" name="message" />
+
+      <button type="submit">Send</button>
+    </form>
+
+    <ul id="messages"></ul>
+
+    <script>
+      // Після підключення скрипту у хедері, з'являється об'єкт io:
+      const ws = io('http://localhost:5000'); // вказуємо шлях куди тре законектитись (link до нашого беку)
+
+      // тепер можна реагувати на події.
+      // На повідомлення друкую його:
+      ws.on('chatInfo', message => {
+        console.log(message);
+      });
+
+      // Обробник подій на повідомлення
+      ws.on('chatMessage', message => {
+        // console.log(message);
+        addMessageToDOM(message);
+      });
+
+      const form = document.getElementById('form');
+
+      form.addEventListener('submit', function (e) {
+        console.log('submit');
+        e.preventDefault();
+
+        const message = e.target.message.value;
+        const user = e.target.user.value;
+
+        const messageResponseToServer = `${user}: ${message}`;
+        ws.emit('chatMessage', messageResponseToServer); // відправка повідомлення на сервер
+        addMessageToDOM(messageResponseToServer); // вивід повідомлення на фронті
+
+        e.target.message.value = ''; // очищую поле input
+      });
+
+      // Виводимо повідомлення у браузері
+      function addMessageToDOM(event) {
+        const ul = document.getElementById('messages');
+        const li = document.createElement('li'); // створюю елемент для повідомлення
+        li.innerText = event; // додаємо текст повідомлення
+        ul.appendChild(li); // додаємо елемент повідомлення до переліку
+      }
+    </script>
+  </body>
+</html>
